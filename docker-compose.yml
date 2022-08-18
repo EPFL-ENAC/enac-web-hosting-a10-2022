@@ -1,0 +1,31 @@
+version: "3.8"
+services:
+  reverse-proxy:
+    image: traefik:v2.8
+    command:
+      - "--entrypoints.web.address=:80"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+    ports:
+      - "80:80"
+    restart: unless-stopped
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+  
+  # https://enacit.epfl.ch
+  enacit:
+    build: https://github.com/EPFL-ENAC/enacit.git#main
+    restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.enacit.rule=Host(`enacit.epfl.ch`)"
+      - "traefik.http.routers.enacit.entrypoints=web"
+
+  # https://enacit1.epfl.ch
+  enacit1:
+    build: https://github.com/EPFL-ENAC/enacit1.git#main
+    restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.enacit1.rule=Host(`enacit1.epfl.ch`)"
+      - "traefik.http.routers.enacit1.entrypoints=web"
