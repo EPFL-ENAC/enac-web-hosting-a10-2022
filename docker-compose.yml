@@ -4,6 +4,7 @@ services:
     image: traefik:v2.8
     command:
       - "--entrypoints.web.address=:80"
+      - "--entryPoints.web.forwardedHeaders.trustedIPs=10.180.30.46"
       - "--providers.docker=true"
       - "--providers.docker.exposedbydefault=false"
     ports:
