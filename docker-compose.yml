@@ -24,7 +24,7 @@ services:
 
   # https://enacit.epfl.ch
   enacit:
-    build: https://github.com/EPFL-ENAC/enacit.git#main
+    build: https://github.com/EPFL-ENAC/hosting-enacit.git#main
     restart: unless-stopped
     labels:
       - "traefik.enable=true"
