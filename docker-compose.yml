@@ -31,3 +31,13 @@ services:
       - "traefik.http.routers.frontend.tls=true"
       - "traefik.http.routers.frontend.rule=PathPrefix(`/`)"
       - "traefik.http.routers.enacit.rule=Host(`enacit.epfl.ch`)"
+
+  # https://enac-it.epfl.ch
+  enac-it:
+    build: https://github.com/EPFL-ENAC/hosting-enacit.git#main
+    restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.frontend.tls=true"
+      - "traefik.http.routers.frontend.rule=PathPrefix(`/`)"
+      - "traefik.http.routers.enac-it.rule=Host(`enac-it.epfl.ch`)"
