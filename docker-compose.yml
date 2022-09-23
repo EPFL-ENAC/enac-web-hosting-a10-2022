@@ -28,8 +28,8 @@ services:
     restart: unless-stopped
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.frontend.tls=true"
-      - "traefik.http.routers.frontend.rule=PathPrefix(`/`)"
+      - "traefik.http.routers.enacit.tls=true"
+      - "traefik.http.routers.enacit.rule=PathPrefix(`/`)"
       - "traefik.http.routers.enacit.rule=Host(`enacit.epfl.ch`)"
 
   # https://enac-it.epfl.ch
@@ -38,6 +38,6 @@ services:
     restart: unless-stopped
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.frontend.tls=true"
-      - "traefik.http.routers.frontend.rule=PathPrefix(`/`)"
+      - "traefik.http.routers.enac-it.tls=true"
+      - "traefik.http.routers.enac-it.rule=PathPrefix(`/`)"
       - "traefik.http.routers.enac-it.rule=Host(`enac-it.epfl.ch`)"
