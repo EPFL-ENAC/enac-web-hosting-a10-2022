@@ -1,0 +1,22 @@
+version: "3.8"
+services:
+
+  enacrepo:
+    image: nginx
+    volumes:
+      - enacrepo-webshare:/usr/share/nginx/html:ro
+      - ./hosts/enacrepo.epfl.ch/nginx/conf.d:/etc/nginx/conf.d:ro
+    restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.enacrepo.tls=true"
+      - "traefik.http.routers.enacrepo.rule=PathPrefix(`/`)"
+      - "traefik.http.routers.enacrepo.rule=Host(`enacrepo.epfl.ch`)"
+
+volumes:
+  enacrepo-webshare:
+    driver: local
+    driver_opts:
+      type: cifs
+      o: addr=${ENACREPO_WEB_SHARE_SERVER},username=${ENACREPO_WEB_SHARE_USERNAME},domain=${ENACREPO_WEB_SHARE_DOMAIN},password=${ENACREPO_WEB_SHARE_PASSWORD},vers=3.0,ro
+      device: "${ENACREPO_WEB_SHARE_PATH}"
