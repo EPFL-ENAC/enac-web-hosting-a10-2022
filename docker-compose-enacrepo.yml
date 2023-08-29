@@ -18,5 +18,5 @@ volumes:
     driver: local
     driver_opts:
       type: cifs
-      o: addr=${ENACREPO_WEB_SHARE_SERVER},username=${ENACREPO_WEB_SHARE_USERNAME},domain=${ENACREPO_WEB_SHARE_DOMAIN},password=${ENACREPO_WEB_SHARE_PASSWORD},vers=3.0,ro
+      o: addr=${ENACREPO_WEB_SHARE_SERVER},username=${ENACREPO_WEB_SHARE_USERNAME},domain=${ENACREPO_WEB_SHARE_DOMAIN},password=${ENACREPO_WEB_SHARE_PASSWORD},ro
       device: "${ENACREPO_WEB_SHARE_PATH}"
