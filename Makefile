@@ -5,12 +5,14 @@ run:
 	docker-compose \
 		-f docker-compose.yml \
 		-f docker-compose-enacrepo.yml \
+		-f docker-compose-enacitarchives.yml \
 		up --build -d
 
 down:
 	docker-compose \
 		-f docker-compose.yml \
 		-f docker-compose-enacrepo.yml \
+		-f docker-compose-enacitarchives.yml \
 	  down
 
 generate-selfsigned-cert:
