@@ -9,6 +9,7 @@ services:
     volumes:
       - enacitarchives-webshare:/var/www/html:ro
       - ./hosts/enacitarchives.epfl.ch/enacitarchives.conf:/etc/apache2/sites-enabled/enacitarchives.conf:ro
+      - ./hosts/enacitarchives.epfl.ch/tequila.conf:/etc/apache2/sites-enabled/tequila.conf:ro
     restart: unless-stopped
     labels:
       - "traefik.enable=true"
