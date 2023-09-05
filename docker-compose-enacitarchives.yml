@@ -1,0 +1,25 @@
+version: "3.8"
+services:
+
+  enacitarchives:
+    # image: php:8.2-apache
+    build:
+      context: hosts/enacitarchives.epfl.ch
+    user: "www-data:www-data"
+    volumes:
+      - enacitarchives-webshare:/var/www/html:ro
+      - ./hosts/enacitarchives.epfl.ch/enacitarchives.conf:/etc/apache2/sites-enabled/enacitarchives.conf:ro
+    restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.enacitarchives.tls=true"
+      - "traefik.http.routers.enacitarchives.rule=PathPrefix(`/`)"
+      - "traefik.http.routers.enacitarchives.rule=Host(`enacitarchives.epfl.ch`)"
+
+volumes:
+  enacitarchives-webshare:
+    driver: local
+    driver_opts:
+      type: cifs
+      o: addr=enac1arch.epfl.ch,username=${USER_ENACIT_WEBHOSTING_USERNAME},domain=${USER_ENACIT_WEBHOSTING_DOMAIN},password=${USER_ENACIT_WEBHOSTING_PASSWORD},ro
+      device: "//enac1arch.epfl.ch/ENAC-IT/webhosting/enacitarchives/"
