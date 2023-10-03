@@ -2,7 +2,6 @@ version: "3.8"
 services:
 
   enacitarchives:
-    # image: php:8.2-apache
     build:
       context: hosts/enacitarchives.epfl.ch
     user: "www-data:www-data"
