@@ -2,17 +2,19 @@ UID := $(shell id -u)
 GID := $(shell id -g)
 
 run:
-	docker-compose \
+	docker compose \
 		-f docker-compose.yml \
 		-f docker-compose-enacrepo.yml \
 		-f docker-compose-enacitarchives.yml \
+		-f docker-compose-enacsoft.yml \
 		up --build -d
 
 down:
-	docker-compose \
+	docker compose \
 		-f docker-compose.yml \
 		-f docker-compose-enacrepo.yml \
 		-f docker-compose-enacitarchives.yml \
+		-f docker-compose-enacsoft.yml \
 	  down
 
 generate-selfsigned-cert:
