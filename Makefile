@@ -4,6 +4,7 @@ GID := $(shell id -g)
 run:
 	docker compose \
 		-f docker-compose.yml \
+		-f docker-compose-enacit-dokuwiki.yml \
 		-f docker-compose-enacitarchives.yml \
 		-f docker-compose-enacrepo.yml \
 		-f docker-compose-enacsoft.yml \
@@ -12,6 +13,7 @@ run:
 down:
 	docker compose \
 		-f docker-compose.yml \
+		-f docker-compose-enacit-dokuwiki.yml \
 		-f docker-compose-enacitarchives.yml \
 		-f docker-compose-enacrepo.yml \
 		-f docker-compose-enacsoft.yml \
