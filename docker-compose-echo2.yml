@@ -1,0 +1,24 @@
+version: "3.8"
+services:
+  enacit-echo2:
+    build:
+      context: hosts/enacit-echo2.epfl.ch
+    environment:
+    - PUID=1000
+    - PGID=1000
+    - TZ=Etc/UTC
+    volumes:
+      - enacit-echo2-webshare:/config:rw
+    restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.enacit-echo2.tls=true"
+      - "traefik.http.routers.enacit-echo2.rule=Host(`echo2.epfl.ch`) && PathPrefix(`/`)"
+
+volumes:
+  enacit-echo2-webshare:
+    driver: local
+    driver_opts:
+      type: cifs
+      o: addr=enac1arch.epfl.ch,username=${USER_ENACIT_WEBHOSTING_USERNAME},domain=${USER_ENACIT_WEBHOSTING_DOMAIN},password=${USER_ENACIT_WEBHOSTING_PASSWORD},uid=1000,gid=1000,rw
+      device: "//enac1arch.epfl.ch/ENAC-IT/webhosting/echo2/"

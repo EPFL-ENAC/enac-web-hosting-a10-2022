@@ -8,6 +8,7 @@ run:
 		-f docker-compose-enacitarchives.yml \
 		-f docker-compose-enacrepo.yml \
 		-f docker-compose-enacsoft.yml \
+		-f docker-compose-echo2.yml \
 		up --build -d
 
 down:
@@ -17,6 +18,7 @@ down:
 		-f docker-compose-enacitarchives.yml \
 		-f docker-compose-enacrepo.yml \
 		-f docker-compose-enacsoft.yml \
+		-f docker-compose-echo2.yml \
 	  down
 
 generate-selfsigned-cert:
