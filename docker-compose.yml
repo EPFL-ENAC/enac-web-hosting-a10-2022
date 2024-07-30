@@ -1,8 +1,8 @@
-version: "3.8"
 services:
   reverse-proxy:
-    image: traefik:v2.8
+    image: traefik:v2.10.5
     command:
+      # - "--log.level=INFO"
       - "--providers.file.directory=/configuration/"
       - "--entrypoints.web.address=:80"
       - "--entryPoints.web.forwardedHeaders.trustedIPs=10.180.30.46"
