@@ -1,9 +1,13 @@
 services:
 
   metalp:
-    image: php:8.3.9-apache
+    build:
+      context: hosts/metalp.epfl.ch
     volumes:
       - metalp-webshare:/var/www/html:ro
+      - ./hosts/metalp.epfl.ch/php.ini:/usr/local/etc/php/php.ini:ro
+      - ./hosts/metalp.epfl.ch/ssmtp.conf:/etc/ssmtp/ssmtp.conf:ro
+      - ./hosts/metalp.epfl.ch/revaliases:/etc/ssmtp/revaliases:ro
     restart: unless-stopped
     labels:
       - "traefik.enable=true"
