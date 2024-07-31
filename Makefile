@@ -9,6 +9,7 @@ run:
 		-f docker-compose-enacrepo.yml \
 		-f docker-compose-enacsoft.yml \
 		-f docker-compose-metalp.yml \
+		-f docker-compose-resslabtools.yml \
 		up --build -d
 
 down:
@@ -19,6 +20,7 @@ down:
 		-f docker-compose-enacrepo.yml \
 		-f docker-compose-enacsoft.yml \
 		-f docker-compose-metalp.yml \
+		-f docker-compose-resslabtools.yml \
 	  down
 
 generate-selfsigned-cert:
