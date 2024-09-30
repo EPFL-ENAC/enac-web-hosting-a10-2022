@@ -1,0 +1,21 @@
+services:
+
+  diffurb:
+    image: nginx
+    volumes:
+      - diffurb-webshare:/usr/share/nginx/html:ro
+      - ./hosts/diffurb.epfl.ch/nginx/conf.d:/etc/nginx/conf.d:ro
+    restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.diffurb.tls=true"
+      - "traefik.http.routers.diffurb.rule=PathPrefix(`/`)"
+      - "traefik.http.routers.diffurb.rule=Host(`diffurb.epfl.ch`)"
+
+volumes:
+  diffurb-webshare:
+    driver: local
+    driver_opts:
+      type: cifs
+      o: addr=enac1files.epfl.ch,username=${USER_ENACIT_WEBHOSTING_USERNAME},domain=${USER_ENACIT_WEBHOSTING_DOMAIN},password=${USER_ENACIT_WEBHOSTING_PASSWORD},ro
+      device: "//enac1files.epfl.ch/LASUR/web/diffurb.epfl.ch/"
