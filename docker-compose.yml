@@ -1,43 +1,10 @@
-services:
-  reverse-proxy:
-    image: traefik:v2.10.5
-    command:
-      # - "--log.level=INFO"
-      - "--providers.file.directory=/configuration/"
-      - "--entrypoints.web.address=:80"
-      - "--entryPoints.web.forwardedHeaders.trustedIPs=10.180.30.46"
-      - "--providers.docker=true"
-      - "--providers.docker.exposedbydefault=false"
-      - "--entrypoints.web.http.redirections.entryPoint.to=websecure"
-      - "--entrypoints.web.http.redirections.entryPoint.scheme=https"
-      - "--entrypoints.web.http.redirections.entryPoint.permanent=true"
-      - "--entrypoints.websecure.address=:443"
-    ports:
-      - "80:80"
-      - "443:443"
-    restart: unless-stopped
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      - ./traefik.yaml:/configuration/traefik.yml
-      - ${SSL_CERT_KEY:-./cert/certificate.key}:/cert/certificate.key
-      - ${SSL_CERT_CRT:-./cert/certificate.crt}:/cert/certificate.crt
-
-  # https://enacit.epfl.ch
-  enacit:
-    build: https://github.com/EPFL-ENAC/hosting-enacit.git#main
-    restart: unless-stopped
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.enacit.tls=true"
-      - "traefik.http.routers.enacit.rule=PathPrefix(`/`)"
-      - "traefik.http.routers.enacit.rule=Host(`enacit.epfl.ch`)"
-
-  # https://enac-it.epfl.ch
-  enac-it:
-    build: https://github.com/EPFL-ENAC/hosting-enacit.git#main
-    restart: unless-stopped
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.enac-it.tls=true"
-      - "traefik.http.routers.enac-it.rule=PathPrefix(`/`)"
-      - "traefik.http.routers.enac-it.rule=Host(`enac-it.epfl.ch`)"
+include:
+  - path:
+      - docker-compose-base.yml
+      - docker-compose-diffurb.yml
+      - docker-compose-enacit-dokuwiki.yml
+      - docker-compose-enacitarchives.yml
+      - docker-compose-enacrepo.yml
+      - docker-compose-enacsoft.yml
+      - docker-compose-metalp.yml
+      - docker-compose-resslabtools.yml
