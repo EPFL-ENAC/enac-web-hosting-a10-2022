@@ -1,0 +1,12 @@
+services:
+
+  echoserver:
+    image: ealen/echo-server
+    restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.echoserver.tls=true"
+      - "traefik.http.routers.echoserver.entrypoints=websecure"
+      - "traefik.http.routers.echoserver.rule=Host(`echoserver.epfl.ch`)"
+      - "traefik.http.services.echoserver.loadbalancer.server.scheme=http"
+      - "traefik.http.services.echoserver.loadbalancer.server.port=80"

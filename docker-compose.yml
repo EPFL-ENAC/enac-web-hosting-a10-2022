@@ -2,6 +2,7 @@ include:
   - path:
       - docker-compose-base.yml
       - docker-compose-diffurb.yml
+      - docker-compose-echoserver.yml
       - docker-compose-enacit-dokuwiki.yml
       - docker-compose-enacitarchives.yml
       - docker-compose-enacrepo.yml
