@@ -2,7 +2,7 @@ services:
   reverse-proxy:
     image: traefik:v3.1
     command:
-      - "--log.level=DEBUG"
+      # - "--log.level=DEBUG"
       - "--providers.file.directory=/configuration/"
       - "--entrypoints.web.address=:80"
       - "--entryPoints.web.forwardedHeaders.insecure"
