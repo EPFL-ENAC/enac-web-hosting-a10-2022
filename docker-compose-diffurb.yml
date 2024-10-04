@@ -11,9 +11,9 @@ services:
       - "traefik.http.routers.diffurb.tls=true"
       - "traefik.http.routers.diffurb.rule=PathPrefix(`/`)"
       - "traefik.http.routers.diffurb.rule=Host(`diffurb.epfl.ch`)"
-      - "traefik.http.middlewares.diffurb-ipwhitelist.ipwhitelist.sourcerange=128.178.0.0/15, 10.0.0.0/8"
-    #   - "traefik.http.middlewares.diffurb-ipwhitelist.ipwhitelist.ipstrategy.depth=2"
-      - "traefik.http.routers.diffurb.middlewares=diffurb-ipwhitelist"
+      - "traefik.http.middlewares.diffurb-ipwhitelist.ipwhitelist.sourcerange=128.178.0.0/15,10.0.0.0/8"
+      - "traefik.http.middlewares.diffurb-ipwhitelist.ipwhitelist.ipstrategy.depth=2"
+      - "traefik.http.routers.diffurb.middlewares=diffurb-ipwhitelist@docker"
 volumes:
   diffurb-webshare:
     driver: local
