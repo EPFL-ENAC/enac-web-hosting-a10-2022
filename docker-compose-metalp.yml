@@ -21,4 +21,4 @@ volumes:
     driver_opts:
       type: cifs
       o: addr=enac1files.epfl.ch,username=${USER_ENACIT_WEBHOSTING_USERNAME},domain=${USER_ENACIT_WEBHOSTING_DOMAIN},password=${USER_ENACIT_WEBHOSTING_PASSWORD},ro
-      device: "//enac1files.epfl.ch/LASUR/web/metalp.epfl.ch/"
+      device: "//enac1files.epfl.ch/RIVER/web/metalp.epfl.ch/"
