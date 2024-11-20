@@ -4,6 +4,7 @@ include:
       - docker-compose-diffurb.yml
       - docker-compose-echoserver.yml
       - docker-compose-enacit-dokuwiki.yml
+      - docker-compose-enacit4r-cdn.yml
       - docker-compose-enacitarchives.yml
       - docker-compose-enacrepo.yml
       - docker-compose-enacsoft.yml

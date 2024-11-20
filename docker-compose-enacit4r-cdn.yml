@@ -1,0 +1,21 @@
+services:
+
+  enacit4r-cdn:
+    image: nginx
+    volumes:
+      - enacit4r-cdn-webshare:/usr/share/nginx/html:ro
+      - ./hosts/enacit4r-cdn.epfl.ch/nginx/conf.d:/etc/nginx/conf.d:ro
+    restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.enacit4r-cdn.tls=true"
+      - "traefik.http.routers.enacit4r-cdn.rule=PathPrefix(`/`)"
+      - "traefik.http.routers.enacit4r-cdn.rule=Host(`enacit4r-cdn.epfl.ch`)"
+
+volumes:
+  enacit4r-cdn-webshare:
+    driver: local
+    driver_opts:
+      type: cifs
+      o: addr=enac1arch.epfl.ch,username=${USER_ENACIT_WEBHOSTING_USERNAME},domain=${USER_ENACIT_WEBHOSTING_DOMAIN},password=${USER_ENACIT_WEBHOSTING_PASSWORD},ro
+      device: "//enac1arch.epfl.ch/ENAC-IT/it4r/enacit4r-cdn/"
