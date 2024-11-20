@@ -1,7 +1,7 @@
 services:
 
   enacit4r-cdn:
-    image: nginx
+    image: nginx:1.26.2-alpine
     volumes:
       - enacit4r-cdn-webshare:/usr/share/nginx/html:ro
       - ./hosts/enacit4r-cdn.epfl.ch/nginx/conf.d:/etc/nginx/conf.d:ro
