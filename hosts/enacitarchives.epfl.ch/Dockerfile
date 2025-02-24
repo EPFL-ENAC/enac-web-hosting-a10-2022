@@ -16,6 +16,11 @@ RUN cd /tequila-2.0.17/Apache/C/ \
 RUN cd /tequila-2.0.17/Apache/C/ \
     && make && make install
 
+# Install Apache OpenIDC
+RUN cd / \
+&& wget https://github.com/OpenIDC/mod_auth_openidc/releases/download/v2.4.16.8/libapache2-mod-auth-openidc_2.4.16.8-1.bookworm_amd64.deb \
+&& apt-get -qy install ./libapache2-mod-auth-openidc_2.4.16.8-1.bookworm_amd64.deb
+
 RUN mkdir /var/tequila \
     && chown www-data: /var/tequila
 # RUN mkdir /var/log/apache2/ \

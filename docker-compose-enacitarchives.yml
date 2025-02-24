@@ -7,7 +7,8 @@ services:
     volumes:
       - enacitarchives-webshare:/var/www/html:ro
       - ./hosts/enacitarchives.epfl.ch/enacitarchives.conf:/etc/apache2/sites-enabled/enacitarchives.conf:ro
-      - ./hosts/enacitarchives.epfl.ch/tequila.conf:/etc/apache2/sites-enabled/tequila.conf:ro
+      - ./hosts/enacitarchives.epfl.ch/auth.conf:/etc/apache2/sites-enabled/auth.conf:ro
+      - ./hosts/enacitarchives.epfl.ch/oidc.secret.conf:/etc/apache2/sites-enabled/oidc.secret.conf:ro
     restart: unless-stopped
     labels:
       - "traefik.enable=true"
