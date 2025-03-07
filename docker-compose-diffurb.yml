@@ -1,7 +1,7 @@
 services:
 
   diffurb:
-    image: nginx
+    image: nginx:1.27-alpine
     volumes:
       - diffurb-webshare:/usr/share/nginx/html:ro
       - ./hosts/diffurb.epfl.ch/nginx/conf.d:/etc/nginx/conf.d:ro
@@ -11,9 +11,8 @@ services:
       - "traefik.http.routers.diffurb.tls=true"
       - "traefik.http.routers.diffurb.rule=PathPrefix(`/`)"
       - "traefik.http.routers.diffurb.rule=Host(`diffurb.epfl.ch`)"
-      - "traefik.http.middlewares.diffurb-ipallowlist.ipallowlist.sourcerange=128.178.0.0/15, 10.0.0.0/8"
-      - "traefik.http.middlewares.diffurb-ipallowlist.ipallowlist.ipstrategy.depth=1"
-      - "traefik.http.routers.diffurb.middlewares=diffurb-ipallowlist@docker"
+      - "traefik.http.middlewares.diffurb-auth.basicauth.users=${DIFFURB_AUTH}"
+      - "traefik.http.routers.diffurb.middlewares=diffurb-auth"
 volumes:
   diffurb-webshare:
     driver: local
