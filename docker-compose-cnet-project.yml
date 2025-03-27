@@ -1,0 +1,24 @@
+services:
+
+  cnet-project:
+    build:
+      context: hosts/cnet-project.epfl.ch
+    volumes:
+      - cnet-project-webshare:/var/www/html:ro
+      - ./hosts/cnet-project.epfl.ch/php.ini:/usr/local/etc/php/php.ini:ro
+      - ./hosts/cnet-project.epfl.ch/ssmtp.conf:/etc/ssmtp/ssmtp.conf:ro
+      - ./hosts/cnet-project.epfl.ch/revaliases:/etc/ssmtp/revaliases:ro
+    restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.cnet-project.tls=true"
+      - "traefik.http.routers.cnet-project.rule=PathPrefix(`/`)"
+      - "traefik.http.routers.cnet-project.rule=Host(`cnet-project.epfl.ch`)"
+
+volumes:
+  cnet-project-webshare:
+    driver: local
+    driver_opts:
+      type: cifs
+      o: addr=enac1files.epfl.ch,username=${USER_ENACIT_WEBHOSTING_USERNAME},domain=${USER_ENACIT_WEBHOSTING_DOMAIN},password=${USER_ENACIT_WEBHOSTING_PASSWORD},ro
+      device: "//enac1files.epfl.ch/RIVER/web/cnet-project.epfl.ch/"

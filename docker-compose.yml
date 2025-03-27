@@ -1,6 +1,7 @@
 include:
   - path:
       - docker-compose-base.yml
+      - docker-compose-cnet-project.yml
       - docker-compose-diffurb.yml
       - docker-compose-echoserver.yml
       - docker-compose-enacit-dokuwiki.yml
