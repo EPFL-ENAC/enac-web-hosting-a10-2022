@@ -7,21 +7,7 @@ RUN apt -qy update \
     && apt -qy install sed wget build-essential ca-certificates \
     apache2-dev libssl-dev libc-client-dev libkrb5-dev libpq-dev
 
-# Install Tequila
-RUN cd / \
-    && wget https://tequila.epfl.ch/download/2.0/tequila-apache-C-2.0.17.tgz \
-    && tar zxvf tequila-apache-C-2.0.17.tgz
-RUN cd /tequila-2.0.17/Apache/C/ \
-    && sed -i 's/ && service httpd restart//g' Makefile
-RUN cd /tequila-2.0.17/Apache/C/ \
-    && make && make install
-
 # Install Apache OpenIDC
 RUN cd / \
     && wget https://github.com/OpenIDC/mod_auth_openidc/releases/download/v2.4.16.8/libapache2-mod-auth-openidc_2.4.16.8-1.bookworm_amd64.deb \
     && apt-get -qy install ./libapache2-mod-auth-openidc_2.4.16.8-1.bookworm_amd64.deb
-
-RUN mkdir /var/tequila \
-    && chown www-data: /var/tequila
-# RUN mkdir /var/log/apache2/ \
-#     && chown www-data: /var/log/apache2/

@@ -7,7 +7,6 @@ services:
     volumes:
       - enacsoft-webshare:/var/www/html:ro
       - ./hosts/enacsoft.epfl.ch/enacsoft.conf:/etc/apache2/sites-enabled/enacsoft.conf:ro
-      - ./hosts/enacsoft.epfl.ch/tequila.conf:/etc/apache2/sites-enabled/tequila.conf:ro
     restart: unless-stopped
     labels:
       - "traefik.enable=true"
