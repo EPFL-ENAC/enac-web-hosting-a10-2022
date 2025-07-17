@@ -1,21 +1,23 @@
 services:
 
   enacit4r-cdn:
-    image: nginx:1.26.2-alpine
-    volumes:
-      - enacit4r-cdn-webshare:/usr/share/nginx/html:ro
-      - ./hosts/enacit4r-cdn.epfl.ch/nginx/conf.d:/etc/nginx/conf.d:ro
+    image: nginx:1.25
     restart: unless-stopped
+    environment:
+      - NGINX_HOST=${HOSTNAME}
+      - NGINX_PORT=80
+      - DNS=${DNS}
+      - S3_ENDPOINT_HOSTNAME=${S3_ENDPOINT_HOSTNAME}
+      - S3_ENDPOINT_PROTOCOL=${S3_ENDPOINT_PROTOCOL}
+      - BLUECITY_API_KEY=${BLUECITY_API_KEY}
+      - S3_BUCKET_NAME=${S3_BUCKET_NAME}
+      - S3_URBES_VIZ_BUCKET_NAME=${S3_URBES_VIZ_BUCKET_NAME}
+    volumes:
+      - ./hosts/enacit4r-cdn.epfl.ch/nginxTemplates:/etc/nginx/templates
+      - ./hosts/enacit4r-cdn.epfl.ch/nginxCache:/etc/nginx/cache
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.enacit4r-cdn.tls=true"
-      - "traefik.http.routers.enacit4r-cdn.rule=PathPrefix(`/`)"
-      - "traefik.http.routers.enacit4r-cdn.rule=Host(`enacit4r-cdn.epfl.ch`)"
-
-volumes:
-  enacit4r-cdn-webshare:
-    driver: local
-    driver_opts:
-      type: cifs
-      o: addr=enac1arch.epfl.ch,username=${USER_ENACIT_WEBHOSTING_USERNAME},domain=${USER_ENACIT_WEBHOSTING_DOMAIN},password=${USER_ENACIT_WEBHOSTING_PASSWORD},ro,vers=3.0
-      device: "//enac1arch.epfl.ch/ENAC-IT/it4r/enacit4r-cdn/"
+      - "traefik.http.routers.enacit4rcdn.tls=true"
+      - "traefik.http.routers.enacit4rcdn.rule=PathPrefix(`/`)"
+      - "traefik.http.routers.enacit4rcdn.rule=Host(`enacit4r-cdn.epfl.ch`)"
+      # - "traefik.http.services.enacit4rcdn.loadbalancer.server.port=80"
