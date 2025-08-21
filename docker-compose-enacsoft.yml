@@ -19,5 +19,5 @@ volumes:
     driver: local
     driver_opts:
       type: cifs
-      o: addr=enac1arch.epfl.ch,username=${USER_ENACIT_WEBHOSTING_USERNAME},domain=${USER_ENACIT_WEBHOSTING_DOMAIN},password=${USER_ENACIT_WEBHOSTING_PASSWORD},ro
+      o: username=${USER_ENACIT_WEBHOSTING_USERNAME},domain=${USER_ENACIT_WEBHOSTING_DOMAIN},password=${USER_ENACIT_WEBHOSTING_PASSWORD},ro
       device: "//enac1arch.epfl.ch/ENAC-IT/webhosting/enacsoft/"

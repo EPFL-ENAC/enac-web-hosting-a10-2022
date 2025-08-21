@@ -20,5 +20,5 @@ volumes:
     driver: local
     driver_opts:
       type: cifs
-      o: addr=enac1arch.epfl.ch,username=${USER_ENACIT_WEBHOSTING_USERNAME},domain=${USER_ENACIT_WEBHOSTING_DOMAIN},password=${USER_ENACIT_WEBHOSTING_PASSWORD},uid=1000,gid=1000,rw
+      o: username=${USER_ENACIT_WEBHOSTING_USERNAME},domain=${USER_ENACIT_WEBHOSTING_DOMAIN},password=${USER_ENACIT_WEBHOSTING_PASSWORD},uid=1000,gid=1000,rw
       device: "//enac1arch.epfl.ch/ENAC-IT/webhosting/enacit-dokuwiki/"
