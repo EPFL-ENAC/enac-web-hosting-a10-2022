@@ -1,10 +1,12 @@
 services:
 
   diffurb:
-    image: nginx:1.27-alpine
+    build:
+      context: ./hosts/diffurb.epfl.ch
     volumes:
-      - diffurb-webshare:/usr/share/nginx/html:ro
-      - ./hosts/diffurb.epfl.ch/nginx/conf.d:/etc/nginx/conf.d:ro
+      - diffurb-webshare:/usr/local/apache2/htdocs:ro
+      - ./hosts/diffurb.epfl.ch/apache.conf:/usr/local/apache2/conf/custom/diffurb.conf:ro
+      - ./hosts/diffurb.epfl.ch/oidc.secret.conf:/usr/local/apache2/conf/oidc.secret.conf:ro
     restart: unless-stopped
     labels:
       - "traefik.enable=true"
@@ -18,5 +20,5 @@ volumes:
     driver: local
     driver_opts:
       type: cifs
-      o: addr=enac1files.epfl.ch,username=${USER_ENACIT_WEBHOSTING_USERNAME},domain=${USER_ENACIT_WEBHOSTING_DOMAIN},password=${USER_ENACIT_WEBHOSTING_PASSWORD},ro
+      o: username=${USER_ENACIT_WEBHOSTING_USERNAME},domain=${USER_ENACIT_WEBHOSTING_DOMAIN},password=${USER_ENACIT_WEBHOSTING_PASSWORD},uid=1000,gid=1000,ro
       device: "//enac1files.epfl.ch/LASUR/web/diffurb.epfl.ch/"
