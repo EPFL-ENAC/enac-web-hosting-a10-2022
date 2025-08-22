@@ -13,8 +13,8 @@ services:
       - "traefik.http.routers.diffurb.tls=true"
       - "traefik.http.routers.diffurb.rule=PathPrefix(`/`)"
       - "traefik.http.routers.diffurb.rule=Host(`diffurb.epfl.ch`)"
-      - "traefik.http.middlewares.diffurb-auth.basicauth.users=${DIFFURB_AUTH}"
-      - "traefik.http.routers.diffurb.middlewares=diffurb-auth"
+      # - "traefik.http.middlewares.diffurb-auth.basicauth.users=${DIFFURB_AUTH}"
+      # - "traefik.http.routers.diffurb.middlewares=diffurb-auth"
 volumes:
   diffurb-webshare:
     driver: local
