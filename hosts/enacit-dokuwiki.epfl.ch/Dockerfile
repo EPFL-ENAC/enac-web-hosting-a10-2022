@@ -1,1 +1,1 @@
-FROM linuxserver/dokuwiki:version-2024-02-06b
+FROM linuxserver/dokuwiki:version-2025-05-14b
